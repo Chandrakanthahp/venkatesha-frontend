@@ -1,0 +1,125 @@
+<div class="container mt-4">
+  <h3 class="text-center">
+    Registered Patients
+    <span *ngIf="filterDate">
+      for "{{ filterDate | date : "dd MMM yyyy" }}"
+    </span>
+  </h3>
+
+  <div class="row mt-3">
+    <div class="col-12 col-md-6 offset-md-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by name, phone, or email"
+        [(ngModel)]="searchTerm"
+        (input)="onSearch()"
+      />
+      <br />
+      <input
+        type="date"
+        class="form-control"
+        [(ngModel)]="filterDate"
+        (ngModelChange)="onDateChange($event)"
+      />
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center gap-4 mt-3 fw-bold">
+    <span class="text-success"> Active: {{ activeCount }} </span>
+
+    <span class="text-secondary"> Completed: {{ completedCount }} </span>
+
+    <span class="text-warning"> On Hold: {{ onHoldCount }} </span>
+  </div>
+  <button
+  class="btn btn-danger"
+  (click)="deleteSelectedPatients()"
+  [disabled]="selectedPatientIds.size === 0"
+>
+  Delete
+</button>
+
+
+  <div class="table-responsive mt-4">
+    <table class="table table-bordered">
+      <thead class="table-dark text-center">
+        <tr>
+          <th>Serial No.</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Activate</th>
+          <th>Hold</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody cdkDropList (cdkDropListDropped)="dropRow($event)">
+        <tr
+          cdkDrag
+          [ngClass]="{
+            'row-active': patient.activated,
+            'table-secondary': patient.done
+          }"
+          *ngFor="let patient of filteredPatients; index as i"
+        >
+          <td>
+            <input
+              type="checkbox"
+              [checked]="selectedPatientIds.has(patient.id)"
+              (change)="togglePatientSelection(patient.id, $event)"
+            />
+            {{ i + 1 }}
+          </td>
+
+          <td>{{ patient.name }}</td>
+          <td>{{ patient.phone }}</td>
+          <td>{{ patient.email || "N/A" }}</td>
+          <td class="text-center">
+            <button
+              class="btn"
+              [ngClass]="
+                patient.done
+                  ? 'btn-outline-done'
+                  : patient.activated
+                  ? 'btn-success'
+                  : 'btn-outline-done'
+              "
+              (click)="handleButtonClick(patient)"
+            >
+              {{
+                patient.done
+                  ? "Activate"
+                  : patient.activated
+                  ? "Done"
+                  : "Activate"
+              }}
+            </button>
+          </td>
+          <td class="text-center">
+            <button
+              class="btn"
+              [ngClass]="patient.onHold ? 'btn-warning' : 'btn-outline-hold'"
+              (click)="holdPatient(patient)"
+            >
+              {{ patient.onHold ? "On Hold" : "Hold" }}
+            </button>
+          </td>
+          <td class="text-center align-middle">
+            <!-- status text -->
+            <span *ngIf="patient.activated">Active</span>
+            <span *ngIf="!patient.activated && patient.onHold">On Hold</span>
+            <span *ngIf="!patient.activated && !patient.onHold && !patient.done"
+              >In queue</span
+            >
+            <span *ngIf="patient.done">Completed</span><br />
+            <!-- Used for dubugging -->
+            <!-- <span>Done {{patient.done}}</span><br>
+      <span>Activated {{patient.activated}}</span> -->
+            <!-- used for debugging -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

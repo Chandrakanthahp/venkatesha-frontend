@@ -1,0 +1,121 @@
+<div class="container d-flex justify-content-center vh-100">
+  <div style="width: 95%">
+    <div style="width: 100%" class="div-bg">
+      <app-navbar></app-navbar>
+    </div>
+    <div class="div-bg p-2 d-flex justify-content-center align-items-center">
+      <div style="width: 75%">
+        <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
+          <div class="form-group mb-2">
+            <label for="name">Name*</label>
+            <input
+              type="text"
+              formControlName="name"
+              id="name"
+              class="form-control"
+              placeholder="Please fill your name here"
+            />
+            <span
+              *ngIf="
+                registerForm.controls['name'].touched &&
+                registerForm.get('name')?.hasError('required')
+              "
+              id="nameError"
+              class="text-danger"
+              >Name is required</span
+            >
+          </div>
+          
+          <div class="form-group mb-2">
+            <label for="aptAt">Appointment Date*</label>
+            <input
+              type="date"
+              formControlName="aptAt"
+              id="aptAt"
+              class="form-control"
+            />
+
+            <span
+              *ngIf="
+                registerForm.get('aptAt')?.touched &&
+                registerForm.get('aptAt')?.hasError('required')
+              "
+              class="text-danger"
+            >
+              Appointment date is required
+            </span>
+          </div>
+
+          <div class="form-group mb-2">
+            <label for="birthDate">Date Of Birth*</label>
+            <input
+              type="date"
+              formControlName="birthDate"
+              id="birthDate"
+              class="form-control"
+            />
+
+            <span
+              *ngIf="
+                registerForm.get('birthDate')?.touched &&
+                registerForm.get('birthDate')?.hasError('required')
+              "
+              class="text-danger"
+            >
+              Don't worry, we cannot do anything by taking your DOB, it's need for medical reasons. BTW you are not a millionare to hack your account.
+            </span>
+          </div>
+
+          <div class="form-group mb-2">
+            <label for="phone">Phone*</label>
+            <input
+              type="tel"
+              inputmode="numeric"
+              formControlName="phone"
+              id="phone"
+              class="form-control"
+              placeholder="Please fill your phone number here"
+            />
+            <span
+              *ngIf="
+                registerForm.get('phone')?.touched &&
+                registerForm.get('phone')?.hasError('required')
+              "
+              class="text-danger"
+            >
+              We cannot hack just by knowing your phone number 🤦‍♂️.
+            </span>
+            <span
+              *ngIf="
+                registerForm.get('phone')?.touched &&
+                registerForm.get('phone')?.hasError('pattern')
+              "
+              class="text-danger"
+            >
+              Please fill the valid phone number
+            </span>
+          </div>
+          <div class="form-group mb-2">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              formControlName="email"
+              id="email"
+              class="form-control"
+              placeholder="Please fill your mail id. Ex: name@xyz.com"
+            />
+          </div>
+          <button
+            [disabled]="registerForm.invalid"
+            type="submit"
+            class="btn btn-outline-green"
+          >
+            Submit
+          </button>
+        </form>
+        <span *ngIf="success" class="text-success">{{ success }}</span>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+.dev-name {
+  font-size: 2em;
+  font-family: "Monoton", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #fcf259;
+}
+
+.footer-bg {
+  /* background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%); */
+  background-color: rgb(17, 15, 15);
+  color: white;
+}
+a {
+  color: #fcf259;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: #ffffff;
+}
+
+.sketch {
+  font-family: "Cabin Sketch", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}

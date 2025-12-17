@@ -1,0 +1,13 @@
+
+.doctor-img{
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+p{
+    text-align: justify;
+}
+.div-bg{
+    background-color: #ECFAE5;
+}

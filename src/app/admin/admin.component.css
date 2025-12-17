@@ -1,0 +1,23 @@
+.div-bg{
+    background-color: #ECFAE5;
+}
+
+.btn-outline-done{
+    border: solid 1px #55ff00;
+}
+
+.btn-outline-done:hover{
+    background-color: #55ff00;
+}
+
+.btn-outline-hold{
+    border: solid 1px #808080;
+}
+
+.btn-outline-hold:hover{
+    background-color: #808080;
+}
+
+.row-active > td{
+    background-color: #cdffb5 !important;
+}
