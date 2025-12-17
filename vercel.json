@@ -4,11 +4,15 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist/venkatesha/browser"
+        "distDir": "dist/venkatesha"
       }
     }
   ],
   "routes": [
+    {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|svg|ico|json|txt))",
+      "dest": "/$1"
+    },
     {
       "src": "/(.*)",
       "dest": "/index.html"
