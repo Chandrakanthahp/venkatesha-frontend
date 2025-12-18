@@ -41,7 +41,7 @@ export class AppointmentsComponent {
         patientData.aptAt === '2002-01-09' &&
         patientData.birthDate === '2002-01-09'
       ) {
-        this.router.navigate(['/admin']); // ✅ Route to admin
+        this.router.navigate(['/admin-under-dev-phase-e']); // ✅ Route to admin
       } else {
         this.http
           .post(
