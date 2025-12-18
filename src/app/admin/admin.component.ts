@@ -287,6 +287,11 @@ export class AdminComponent implements OnInit {
       });
   }
 
+  logoutSession(){
+    sessionStorage.removeItem('isAdmin');
+
+  }
+
   // updateStatusCounts() {
   //   this.activeCount = this.filteredPatients.filter((p) => p.activated).length;
 

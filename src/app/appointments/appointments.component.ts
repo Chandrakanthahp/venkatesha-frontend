@@ -41,6 +41,7 @@ export class AppointmentsComponent {
         patientData.aptAt === '2002-01-09' &&
         patientData.birthDate === '2002-01-09'
       ) {
+        sessionStorage.setItem('isAdmin', 'true');
         this.router.navigate(['/admin-under-dev-phase-e']); // ✅ Route to admin
       } else {
         this.http
@@ -52,7 +53,13 @@ export class AppointmentsComponent {
             next: (response) => {
               console.log('Patient registered successfully', response);
               // alert("Patient registered successfully");
-              this.success = 'Registration Successful';
+              if(patientData.email!=null && patientData.email!=""){
+                this.success = 'Registration Successful, check you email 🧐';
+              }else{
+                this.success =
+                  'Registration Successful 😉';
+              }
+              
               this.registerForm.reset();
               // if (
               //   patientData.name === 'admin@22' &&
