@@ -54,7 +54,7 @@ export class AppointmentsComponent {
               console.log('Patient registered successfully', response);
               // alert("Patient registered successfully");
               if(patientData.email!=null && patientData.email!=""){
-                this.success = 'Registration Successful, check you email 🧐';
+                this.success = 'Registration Successful, check your email 🧐';
               }else{
                 this.success =
                   'Registration Successful 😉';
